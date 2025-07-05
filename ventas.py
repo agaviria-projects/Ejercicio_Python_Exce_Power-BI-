@@ -20,6 +20,8 @@ duplicados_exactos = df[df.duplicated()]
 print("Duplicados exactos:\n", duplicados_exactos)
 print("Total duplicados exactos:", len(duplicados_exactos))
 
+df["Producto"]
+
 #duplicados_zona_producto=df[df.duplicated(subset=["Zona","Producto"],keep=False)]
 #print(duplicados_zona_producto)
 
@@ -28,27 +30,31 @@ df['Producto']=df['Producto'].str.strip().str.lower()
 
 df['Margen']=df['PrecioVenta']-df['Costo']
 
-def convertir_a_tabla_excel(ruta_archivo, nombre_tabla):
-    wb = load_workbook(ruta_archivo)
-    ws = wb.active
+print(df['Zona'].value_counts())
+print(df['Producto'].value_counts())
 
-    max_row = ws.max_row
-    max_col = ws.max_column
-    col_final = chr(64 + max_col)  # Calcula la última columna (A, B, C...)
 
-    rango = f"A1:{col_final}{max_row}"  # Define el rango A1:col_final
-    tabla = Table(displayName=nombre_tabla, ref=rango)
-    estilo = TableStyleInfo(name="TableStyleMedium9", showRowStripes=True)
-    tabla.tableStyleInfo = estilo
-    ws.add_table(tabla)
+# def convertir_a_tabla_excel(ruta_archivo, nombre_tabla):
+#     wb = load_workbook(ruta_archivo)
+#     ws = wb.active
 
-    wb.save(ruta_archivo)
-    print(f"✅ Tabla '{nombre_tabla}' creada en {ruta_archivo}")
+#     max_row = ws.max_row
+#     max_col = ws.max_column
+#     col_final = chr(64 + max_col)  # Calcula la última columna (A, B, C...)
 
-df.to_excel('archivo_ventas.xlsx',index=False)
-convertir_a_tabla_excel('archivo_ventas.xlsx','Tabla_ventas')
+#     rango = f"A1:{col_final}{max_row}"  # Define el rango A1:col_final
+#     tabla = Table(displayName=nombre_tabla, ref=rango)
+#     estilo = TableStyleInfo(name="TableStyleMedium9", showRowStripes=True)
+#     tabla.tableStyleInfo = estilo
+#     ws.add_table(tabla)
 
-# print(df)
+#     wb.save(ruta_archivo)
+#     print(f"✅ Tabla '{nombre_tabla}' creada en {ruta_archivo}")
+
+#df.to_excel('archivo_ventas.xlsx',index=False)
+#convertir_a_tabla_excel('archivo_ventas.xlsx','Tabla_ventas')
+
+print(df)
 # print(df.info())
 # print(df.dtypes)
 # print(df.shape)
